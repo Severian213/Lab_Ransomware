@@ -1,4 +1,4 @@
-import keyGeneration
+import keyGeneration, math
 
 publicKey, privateKey = keyGeneration.keyGen(1024) 
 

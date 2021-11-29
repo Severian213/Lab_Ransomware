@@ -1,4 +1,4 @@
-import primeNumbers
+import primeNumbers, random
 
 def gcd(a, b):
     while a != 0:

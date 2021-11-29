@@ -22,8 +22,8 @@ def keyGen(bits):
     q = 0
 
     while p == q:
-        p = largePrime(bits)
-        q = largePrime(bits)
+        p = primeNumbers.largePrime(bits)
+        q = primeNumbers.largePrime(bits)
 
     n = p * q
     phi_n = (p - 1) * (q - 1)

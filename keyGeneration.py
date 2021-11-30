@@ -16,7 +16,7 @@ def modInverse(a, m):
 
     return u1 % m
 
-# Generate keys {generateKey}
+
 def keyGen(bits):
     p = 0
     q = 0

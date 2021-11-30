@@ -52,7 +52,7 @@ def recursive_decryption(path):
         return None
 
 
-recursive_encryption('C:/example/file/path/to/start/')
+recursive_encryption('C:/example/location/to/start/')
 #tkinter popup
 root = Tk()
 
@@ -87,5 +87,5 @@ def button():
 button()
 root.mainloop()
 
-recursive_decryption('C:/example/file/path/to/start/')
+recursive_decryption('C:/example/location/to/start/')
 

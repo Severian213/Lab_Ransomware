@@ -6,6 +6,7 @@ SYMBOL_SET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890 !"Â
 
 # Main body of the RSA
 def main(modes, msg):
+    '''Initiate encryption or decryption.'''
     msg = str(msg)
     mode = modes
     if mode == 'encrypt':
@@ -17,6 +18,7 @@ def main(modes, msg):
     
 
 def textToBlocks(message, blockSize):
+    '''Convert the text from a string to an integer block.'''
     for character in message:
         if character not in SYMBOL_SET:
             print(f"The symbol set does not contain the character {character}.")
@@ -30,6 +32,7 @@ def textToBlocks(message, blockSize):
     return blockInts
 
 def blocksToText(blockInts, messageLength, blockSize):
+    '''Convert blocks of integers to text'''
     message = []
     for blockInt in blockInts:
         blockMessage = []
@@ -42,6 +45,7 @@ def blocksToText(blockInts, messageLength, blockSize):
     return ''.join(message)
 
 def encryptBlocks(message, key, blockSize):
+    '''encrypt integer blocks'''
     encryptedBlocks = []
     n, e = key
     for block in textToBlocks(message, blockSize):
@@ -49,6 +53,7 @@ def encryptBlocks(message, key, blockSize):
     return encryptedBlocks
 
 def decryptBlocks(encryptedBlocks, messageLength, key, blockSize):
+    '''Decrypt integer blocks'''
     decryptedBlocks = []
     n, d = key
     for block in encryptedBlocks:
@@ -60,6 +65,7 @@ def readKey(key):
     return (int(keySize), int(n), int(EorD))
 
 def encrypt(key, message, blockSize=None):
+    '''Encrypt the content.'''
     keySize, n, e = readKey(key)
     if blockSize == None:
         blockSize = int(math.log(2 ** keySize, len(SYMBOL_SET)))
@@ -75,6 +81,7 @@ def encrypt(key, message, blockSize=None):
     return encryptedContent
 
 def decrypt(key, content):
+    '''Decrypt the content.'''
     keySize, n, d = readKey(key)
     content = str(content)
     messageLength, blockSize, encryptedMessage = content.split('_')

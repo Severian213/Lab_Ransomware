@@ -8,7 +8,7 @@ SYMBOL_SET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890 !"Â
 def main(modes, msg):
     '''Initiate encryption or decryption.'''
     msg = str(msg)
-    mode = modes
+    mode = modes # set to encrypt or decrypt.
     if mode == 'encrypt':
         encryptedText = encrypt(publicKey, msg)
         return encryptedText
@@ -19,12 +19,12 @@ def main(modes, msg):
 
 def textToBlocks(message, blockSize):
     '''Convert the text from a string to an integer block.'''
-    for character in message:
-        if character not in SYMBOL_SET:
+    for char in message:
+        if char not in SYMBOL_SET:
             print(f"The symbol set does not contain the character {character}.")
             sys.exit()
     blockInts = []
-    for blockStart in range(0, len(message), blockSize):
+    for blockStart in range(0, len(message), blockSize): # Calculates the block integer
         blockInt = 0
         for i in range(blockStart, min(blockStart + blockSize, len(message))):
             blockInt += (SYMBOL_SET.index(message[i])) * ((len(SYMBOL_SET) ** (i % blockSize)))
@@ -66,10 +66,10 @@ def readKey(key):
 
 def encrypt(key, message, blockSize=None):
     '''Encrypt the content.'''
-    keySize, n, e = readKey(key)
+    keyBits, n, e = readKey(key)
     if blockSize == None:
         blockSize = int(math.log(2 ** keySize, len(SYMBOL_SET)))
-    if not (math.log(2 ** keySize, len(SYMBOL_SET)) >= blockSize):
+    if not (math.log(2 ** keyBits, len(SYMBOL_SET)) >= blockSize):
         sys.exit("Error: Block size is too large")
     encryptedBlocks = encryptBlocks(message, (n, e), blockSize)
 
@@ -82,13 +82,13 @@ def encrypt(key, message, blockSize=None):
 
 def decrypt(key, content):
     '''Decrypt the content.'''
-    keySize, n, d = readKey(key)
+    keyBits, n, d = readKey(key)
     content = str(content)
     messageLength, blockSize, encryptedMessage = content.split('_')
     messageLength = int(messageLength)
     blockSize = int(blockSize)
 
-    if not (math.log(2 ** keySize, len(SYMBOL_SET)) >= blockSize):
+    if not (math.log(2 ** keyBits, len(SYMBOL_SET)) >= blockSize):
         sys.exit("Error: Block size is too large.")
 
     encryptedBlocks = []

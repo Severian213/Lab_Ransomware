@@ -58,7 +58,7 @@ def decryptBlocks(encryptedBlocks, messageLength, key, blockSize):
     decryptedBlocks = []
     n, d = key
     for block in encryptedBlocks:
-        decryptedBlocks.append(pow(block, d, n)) # equivalent to block**n(mod d). This is how we decrypt the blocks.
+        decryptedBlocks.append(pow(block, d, n)) # equivalent to block**d(mod n). This is how we decrypt the blocks.
     return blocksToText(decryptedBlocks, messageLength, blockSize) # Once the blocks have been decrypted, pass them to blocksToText()
 
 def readKey(key):
